@@ -1,22 +1,9 @@
 const mysql = require("mysql");
 const excel = require("exceljs");
-
-const config = {
-	db: {
-		host: "localhost",
-		user: "root",
-		password: "",
-		database: "test",
-	},
-	columns: [
-		{ header: "Id", key: "id", width: 10 },
-		{ header: "Name", key: "name", width: 30 },
-		{ header: "Price", key: "price", width: 30 },
-	],
-};
+const {dbConfig, dbColumns} = require('./config');
 
 // Create a connection to the database
-const db = mysql.createConnection(config.db);
+const db = mysql.createConnection(dbConfig);
 
 // Open the MySQL connection
 db.connect((err) => {
@@ -42,7 +29,7 @@ db.connect((err) => {
 		// Creating worksheet
 		let worksheet = workbook.addWorksheet("users");
 
-		worksheet.columns = [...config.columns];
+		worksheet.columns = [...dbColumns];
 
 		// Add rows to the Excel file
 		worksheet.addRows(jsonUsers);

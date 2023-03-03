@@ -1,13 +1,22 @@
 const mysql = require("mysql");
 const excel = require("exceljs");
 
+const config = {
+	db: {
+		host: "localhost",
+		user: "root",
+		password: "",
+		database: "test",
+	},
+	columns: [
+		{ header: "Id", key: "id", width: 10 },
+		{ header: "Name", key: "name", width: 30 },
+		{ header: "Price", key: "price", width: 30 },
+	],
+};
+
 // Create a connection to the database
-const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "test",
-});
+const db = mysql.createConnection(config.db);
 
 // Open the MySQL connection
 db.connect((err) => {
@@ -33,20 +42,15 @@ db.connect((err) => {
 		// Creating worksheet
 		let worksheet = workbook.addWorksheet("users");
 
-		// WorkSheet Header
-		worksheet.columns = [
-			{ header: "Id", key: "id", width: 10 },
-			{ header: "Name", key: "name", width: 30 },
-			{ header: "Price", key: "price", width: 30 },
-		];
+		worksheet.columns = [...config.columns];
 
 		// Add rows to the Excel file
 		worksheet.addRows(jsonUsers);
 
 		// Output from Excel file
 		workbook.xlsx
-			.writeFile("users.xlsx")
-			.then(() => console.log("file saved!"));
+			.writeFile("Users.xlsx")
+			.then(() => console.log("File saved!"));
 
 		// Close MySQL connection
 		db.end((err) => {

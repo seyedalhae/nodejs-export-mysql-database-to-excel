@@ -1,0 +1,21 @@
+{
+	"name": "nodejs-export-mysql-database-to-excel",
+	"version": "1.0.0",
+	"description": "Export MySQL Database To Excel In NodeJS",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js"
+	},
+	"keywords": [
+		"Nodejs",
+		"MySQL",
+		"Excel"
+	],
+	"author": "ozenero.com",
+	"license": "ISC",
+	"dependencies": {
+		"exceljs": "^4.3.0",
+		"mysql": "^2.18.1"
+	}
+}
